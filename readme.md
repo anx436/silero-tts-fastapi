@@ -22,12 +22,12 @@ Using [`uv`](https://github.com/astral-sh/uv) (recommended) or standard `pip`:
 ```bash
 # With uv:
 uv venv
-uv pip install fastapi uvicorn torch soundfile lameenc numpy
+uv pip install fastapi uvicorn torch soundfile lameenc numpy num2words
 
 # Or with pip:
 python -m venv .venv
 source .venv/bin/activate
-pip install fastapi uvicorn torch soundfile lameenc numpy
+pip install fastapi uvicorn torch soundfile lameenc numpy num2words
 ```
 
 ### 2. Start the Server

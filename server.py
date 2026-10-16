@@ -14,6 +14,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
+import re
+from num2words import num2words
+
+def verbalize_russian_numbers(text: str) -> str:
+    # Converts sequences of digits into Russian words (e.g. 25 -> двадцать пять)
+    return re.sub(r'\b\d+\b', lambda m: num2words(int(m.group()), lang='ru'), text)
+
 app = FastAPI(
     title="Silero v5.5 OpenAI-Compatible TTS Server",
     description="Local, lightweight Russian text-to-speech server with continuous MP3 streaming.",
@@ -123,6 +130,7 @@ def audio_stream_generator(sentences: list[str], speaker: str) -> typing.Iterato
 
     for sentence in sentences:
         try:
+            sentence = verbalize_russian_numbers(sentence)
             audio = model.apply_tts(
                 text=sentence,
                 speaker=speaker,
